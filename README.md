@@ -2,7 +2,7 @@
 
 Make anything happen automically. Define your rules directly as Clubhouse Stories. 
 
-To give you a taste, check out these few examples. However, possibilities really are endless. See the [recipies](#Recipies) for code.
+To give you a taste, check out these few examples. However, possibilities really are endless. See the [recipes](#Recipes) for code.
 
 - Every third wednesday of the month, create a new story in project "Company maintenance" named "Send invoices". Set due date 7 days later.
 - When a story in project "Design" is completed, create a new story in project "Engineering" with the same name and with a relationship to the design story.
