@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import express from "express"
 import crypto from "crypto"
 import bodyParser from "body-parser"
