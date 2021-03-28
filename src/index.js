@@ -256,7 +256,7 @@ function broadcastTimeBasedActions() {
   )
 }
 
-async function run() {
+export async function run() {
   try {
     setInterval(broadcastTimeBasedActions, 60000)
 

@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-import { run } from "clubhouse-gears"
+import { run } from "./index.js"
 run()

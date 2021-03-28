@@ -31,8 +31,6 @@ sudo docker build -t gears .
 sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert clubhouse secret here" -p 1337:80 -it gears
 ```
 
-# Recipies
-
 # API
 
 When executing code the `action` and `metadata` variables are always available. The `action` object has two origins:
@@ -121,11 +119,21 @@ See these examples as a great way to understand how this all comes together.
 ## Create story for invoicing every first and third wednesday of each month
 
 ```
-when ([1, 3].includes(changes.dayOfWeek))
+when (changes.dayOfWeek === 2 && [1, 3].includes(changes.daysOfMonth))
 ```
 
 ```javascript
-
+// could also fetch this from some external API
+const customers = [`BigAppleInc`, `DarknessInc`] 
+const projects = await api.listProjects()
+const deadline = new Date(new Date().getTime() + 60000 * 60 * 24 * 7)
+const story = await api.createStory({
+  name: `Send invoices`,
+  description: `Send invoices to ${customers.join(`, `)}`,
+  project_id: projects.find((it) => it.name === `Abstrakt`).id,
+  deadline: deadline.toISOString(),
+})
+console.log(`I created ch${story.id}`)
 ```
 
 ## Add information from Wikipedia
@@ -136,8 +144,6 @@ This comments on a newly created story with an excerpt from Wikipedia.
 when (entity_type === `story` && action_type === `create`)
 ```
 
-```
-
 ```javascript
 url = `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exsentences=1&titles=${name.split(` `)[0]}`
 
@@ -145,4 +151,35 @@ json = await (fetch(url).then(res => res.json()))
 
 api.createStoryComment(id, Object.values(json.query.pages)[0].extract)
 ```
+
+## When story is completed, create related story
+
+```
+// `new` is true if the `new` state is completed, otherwise it is false. There is also `old`.
+when (changes.completed && changes.completed.new)
+```
+
+```javascript
+const whenFinishedProjectName = `design`
+const thenCreateProjectName = `engineering`
+
+const projects = await api.listProjects()
+const project_id = projects.find(it => it.name === whenFinishedProjectName).id
+const story = await api.getStory(id)
+
+if (story.project_id === project_id) {
+  const newStory = await api.createStory({ 
+    name: story.name,
+    description: `See linked story for design.`,
+    project_id: projects.find(it => it.name === thenCreateProjectName).id,
+    epic_id: story.epic_id,
+  })
+
+  await api.createStoryLink({
+    object_id: story.id,
+    subject_id: newStory.id,
+    verb: `relates to`, // can also be 'blocks' or 'duplicates'
+  })
+
+console.log(`I just created this story ch${newStory.id}`)
 ```
