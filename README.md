@@ -2,7 +2,7 @@
 
 Make anything happen automically. Define your rules directly as Clubhouse Stories. 
 
-To give you a taste, check out these few examples. However, possibilities really are endless. See the [recipes](#Recipes) for code.
+To give you a taste, check out these few examples. However, possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
 - Every third wednesday of the month, create a new story in project "Company maintenance" named "Send invoices". Set due date 7 days later.
 - When a story in project "Design" is completed, create a new story in project "Engineering" with the same name and with a relationship to the design story.
@@ -41,15 +41,15 @@ When executing code the `action` and `metadata` variables are always available. 
 
 Gears do provide a few convenience variables to the action object, just to ease the strain on your fingers:
 
-| variable | origin | meaning
-|-|-
-| id | `action.id` | ID of story, epic, comment, etc.
-| entity_type | `action.entity_type` | "story", "epic", "time"
-| action_type | `action.action`, i.e.  "create", "update"
-| name | `action.name`, the name of the story or the epic in question
-| app_url | `action.appUrl`, the public url
-| changes | `action.changes`, the changes involved in this action, i.e. tags being changed, description updated, etc.
-| author_id | `action.author_id`, ID of the user who created a comment
+| variable | origin | meaning |
+| - | - | - |
+| id | `action.id` | ID of story, epic, comment, etc. |
+| entity_type | `action.entity_type` | "story", "epic", "time" |
+| action_type | `action.action`, i.e.  "create", "update" |
+| name | `action.name`, the name of the story or the epic in question |
+| app_url | `action.appUrl`, the public url |
+| changes | `action.changes`, the changes involved in this action, i.e. tags being changed, description updated, etc. |
+| author_id | `action.author_id`, ID of the user who created a comment |
 
 
 ## Webhook API
@@ -62,17 +62,17 @@ Whenever `references` key is set, Gears will automatically copy the referenced o
 
 This is an internal module that submits actions when time has passed various criterias. This is especially suitable when automating the creation of stories that are recurring in nature. Time module always set `entity_type = "time"` and `action = "update"`. The `changes` variable holds one key for each criteria met
 
-| criteria name | possible values | meaning
-| - | - |
-| minute | 0 to 59 | A new minute
-| hour | 0 to 23 | A new hour
-| day | 1 to 31 | A new calendar day
-| dayOfWeek | 0 to 6 | A new week day, 0 = monday, 6 = sunday
-| week | 1 to 53 | A new calendar week (ISO-8601)
-| daysOfMonth | 1 to 5 | New number of week days in month. I.e. if today is a thursday and daysOfMonth = 3, then today is the third thursday this month
-| month | 1 to 12 | A new month
-| quarter | 1 to 4 | A new quarter
-| year | 1 to 12 | A new year
+| criteria name | possible values | meaning |
+| - | - | - |
+| minute | 0 to 59 | A new minute |
+| hour | 0 to 23 | A new hour |
+| day | 1 to 31 | A new calendar day |
+| dayOfWeek | 0 to 6 | A new week day, 0 = monday, 6 = sunday |
+| week | 1 to 53 | A new calendar week (ISO-8601) |
+| daysOfMonth | 1 to 5 | New number of week days in month. I.e. if today is a thursday and daysOfMonth = 3, then today is the third thursday this month |
+| month | 1 to 12 | A new month |
+| quarter | 1 to 4 | A new quarter |
+| year | 1 to 12 | A new year |
 
 Note that all these criterias are always present in `metadata` variable. However `action.changes` will only include the ones that are relevant for the current action.
 
@@ -123,16 +123,21 @@ when (changes.dayOfWeek === 2 && [1, 3].includes(changes.daysOfMonth))
 ```
 
 ```javascript
-// could also fetch this from some external API
+// could also fetch customers from some external API
 const customers = [`BigAppleInc`, `DarknessInc`] 
 const projects = await api.listProjects()
 const deadline = new Date(new Date().getTime() + 60000 * 60 * 24 * 7)
 const story = await api.createStory({
   name: `Send invoices`,
-  description: `Send invoices to ${customers.join(`, `)}`,
+  description: `Some desctiption goes here`, `)}`,
   project_id: projects.find((it) => it.name === `Abstrakt`).id,
   deadline: deadline.toISOString(),
 })
+
+for (const customer of customers) {
+  await createTask(story.id, { description: customer })
+}
+
 console.log(`I created ch${story.id}`)
 ```
 
