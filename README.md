@@ -114,7 +114,7 @@ Your stories can now have code like: `kaboom(new Date().getTime() + 60000, "Self
 
 # Recipes
 
-See these examples as a great way to understand how this all comes together.
+Try these examples as a great way to understand how this all comes together.
 
 ## Create story for invoicing every first and third wednesday of each month
 
