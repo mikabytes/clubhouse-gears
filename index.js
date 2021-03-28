@@ -14,7 +14,7 @@ export function addExtension(name, implementation) {
   extensions.push([name, implementation])
 }
 
-const api = Clubhouse.create(process.env.CLUBHOUSE_API_TOKEN)
+const api = Clubhouse.create(process.env.CLUBHOUSE)
 
 addExtension(`fetch`, fetch)
 addExtension(`api`, api)
@@ -42,7 +42,7 @@ async function setupRules() {
   for await (const [whenCode, thenCode, story] of storiesToRules(
     downloadStories()
   )) {
-    const c = createConsole({story})
+    const c = createConsole({ story })
 
     try {
       const whenFunc = new Function(
@@ -74,7 +74,7 @@ async function setupRules() {
       thenFunc.code = thenCode
 
       when(whenFunc).then(thenFunc)
-    } catch(e) {
+    } catch (e) {
       c.error(e)
     }
   }
