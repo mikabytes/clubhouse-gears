@@ -11,10 +11,10 @@ To give you a taste, check out these few examples. However, possibilities really
 
 ## Installation
 
-**Note of caution:** All code is executed on the server. This means that all members of Clubhouse will be able to run any code wherever this is deployed. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
+**Note of caution:** All code provided in Clubhouse stories is executed on the server. This means that all members of Clubhouse will be able to run any code wherever this is deployed. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
 
 ```
-npm add mikabytes/clubhouse-gears
+npm install mikabytes/clubhouse-gears
 ```
 
 Default port is 80. Default secret is 'oh-so-secret' (secret is optional). Head on over to https://app.clubhouse.io/<your-organization-id>/settings/integrations/outgoing-webhook to set your URL and secret.
