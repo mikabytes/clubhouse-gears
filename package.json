@@ -8,7 +8,7 @@
     "test": "mocha"
   },
   "bin": {
-    "gears": "./src/index.js"
+    "gears": "./src/cli.js"
   },
   "author": "",
   "license": "ISC",
