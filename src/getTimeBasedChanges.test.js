@@ -38,6 +38,24 @@ describe(`getTimeBasedChanges`, () => {
     })
   })
 
+  it(`should include Q1`, () => {
+    let [changes] = getTimeBasedChanges(new Date(2021, 0, 1, 0, 0))
+    assert.equal(changes.quarter, 1)
+  })
+
+  it(`should include Q2`, () => {
+    let [changes] = getTimeBasedChanges(new Date(2021, 3, 1, 0, 0))
+    assert.equal(changes.quarter, 2)
+  })
+  it(`should include Q3`, () => {
+    let [changes] = getTimeBasedChanges(new Date(2021, 6, 1, 0, 0))
+    assert.equal(changes.quarter, 3)
+  })
+  it(`should include Q4`, () => {
+    let [changes] = getTimeBasedChanges(new Date(2021, 9, 1, 0, 0))
+    assert.equal(changes.quarter, 4)
+  })
+
   it(`should include new month`, () => {
     const [changes] = getTimeBasedChanges(new Date(2021, 2, 1, 0, 0))
     assert.deepEqual(changes, {
@@ -58,6 +76,7 @@ describe(`getTimeBasedChanges`, () => {
       day: 1,
       dayOfWeek: 4,
       month: 0,
+      quarter: 1,
       year: 2021,
     })
   })

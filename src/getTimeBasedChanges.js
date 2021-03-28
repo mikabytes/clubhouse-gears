@@ -7,6 +7,7 @@ export default function getTimeBasedChanges(date) {
     week: getWeekNumber(date),
     daysOfMonth: getDaysOfMonth(date),
     month: date.getMonth(),
+    quarter: getQuarter(date),
     year: date.getFullYear(),
   }
 
@@ -27,6 +28,10 @@ export default function getTimeBasedChanges(date) {
 
       if (reference.day === 1) {
         changes.month = reference.month
+
+        if ([0, 3, 6, 9].includes(reference.month)) {
+          changes.quarter = reference.quarter
+        }
 
         if (reference.month === 0) {
           changes.year = reference.year
@@ -62,4 +67,9 @@ function getDaysOfMonth(d) {
   }
 
   return count
+}
+
+function getQuarter(d) {
+  let m = Math.floor(d.getMonth() / 3) + 1
+  return m
 }

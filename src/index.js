@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import express from "express"
 import crypto from "crypto"
 import bodyParser from "body-parser"
@@ -272,40 +270,4 @@ async function run() {
 
 function stringify(obj) {
   return util.inspect(obj)
-  // JSON.stringify(
-  //   obj,
-  //   function replacer(key, value) {
-  //     const type = typeof value
-  //     if (value === undefined) {
-  //       return `undefined`
-  //     }
-  //     if (value === null) {
-  //       return `null`
-  //     }
-  //     if ([`symbol`, `function`].includes(type)) {
-  //       return value.toString()
-  //     }
-  //     if (value instanceof Error) {
-  //       return value.stack
-  //     }
-  //     if (value instanceof WeakMap) {
-  //       return value.toString()
-  //     }
-  //     if (value instanceof Map) {
-  //       const ret = {}
-  //       for (const k of value.keys()) {
-  //         ret[k] = value.get(k)
-  //       }
-
-  //       return ret
-  //     }
-  //     if (value instanceof Set) {
-  //       return [...value.values()]
-  //     }
-  //     return value
-  //   },
-  //   4
-  // )
 }
-
-run()
