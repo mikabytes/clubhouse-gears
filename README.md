@@ -31,6 +31,13 @@ sudo docker build -t gears .
 sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert clubhouse secret here" -p 1337:80 -it gears
 ```
 
+# How to use
+
+Gears fetches all the rules from Clubhouse. Any story that has the label "gears" set on it and a name that is formatted like "when (some code goes here)" will be used. See [Recipes](#Recipes) for examples.
+
+When a change qualifies (passes the `when()` clause in Story name), Gears looks for code blocks in the story description and executes it as javascript. **Note**: only code blocks are used, so you are free to document your gear as you wish.
+
+
 # API
 
 When executing code the `action` and `metadata` variables are always available. The `action` object has two origins:
