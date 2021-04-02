@@ -9,6 +9,11 @@ To give you a taste, check out these few examples. However, possibilities really
 - When a story is moved to "Release" column, send an e-mail using Sendgrid.
 - For every story created, search Wikipedia for information about name and comment an excerpt. (why would you want this?)
 
+# Preparation
+
+1. You need to run Gears somewhere publicly available. For example DigitalOcean, or a home server (with port forwarding). An idea might also be to create a tunnel to your local computer (for local testing).
+2. You need to create a Clubhouse Webhook. Go to clubhouse.io, click your profile picture, Integrations, Webhooks, Add New Webhook.
+
 # Installation
 
 **Note of caution:** All code provided in Clubhouse stories is executed on the server. This means that all members of Clubhouse will be able to run any code wherever this is deployed. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
@@ -36,7 +41,6 @@ sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert
 Gears fetches all the rules from Clubhouse. Any story that has the label "gears" set on it and a name that is formatted like "when (some code goes here)" will be used. See [Recipes](#Recipes) for examples.
 
 When a change qualifies (passes the `when()` clause in Story name), Gears looks for code blocks in the story description and executes it as javascript. **Note**: only code blocks are used, so you are free to document your gear as you wish.
-
 
 # API
 
