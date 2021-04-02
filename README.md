@@ -8,8 +8,6 @@ Gears is an extension to Clubhouse.io that enables automating common tasks in a 
   </a>
 </p>
 
-[![](assets/youtube.png)](http://www.youtube.com/watch?v=SpzzbbauKRA "Introduction to Clubhouse Gears")
-
 To give you a taste, check out these few examples. However, possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
 - Every third wednesday of the month, create a new story in project "Company maintenance" named "Send invoices". Set due date 7 days later.
