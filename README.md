@@ -192,6 +192,7 @@ if (story.project_id === project_id) {
     subject_id: newStory.id,
     verb: `relates to`, // can also be 'blocks' or 'duplicates'
   })
+}
 
 console.log(`I just created this story ch${newStory.id}`)
 ```
