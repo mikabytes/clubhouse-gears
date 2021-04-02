@@ -1,6 +1,8 @@
 # Clubhouse Gears
 
-Make anything happen automically. Define your wishes directly as Clubhouse Stories. 
+Gears is an extension to Clubhouse.io that enables automating common tasks in a WHEN-THEN pattern. Rules are written in plain Javascript and configured directly in Clubhouse. 
+
+[![](http://img.youtube.com/vi/SpzzbbauKRA/0.jpg)](http://www.youtube.com/watch?v=SpzzbbauKRA "Introduction to Clubhouse Gears")
 
 To give you a taste, check out these few examples. However, possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
@@ -196,6 +198,7 @@ if (story.project_id === project_id) {
     subject_id: newStory.id,
     verb: `relates to`, // can also be 'blocks' or 'duplicates'
   })
+}
 
 console.log(`I just created this story ch${newStory.id}`)
 ```
