@@ -1,6 +1,6 @@
 # Clubhouse Gears
 
-Make anything happen automically. Define your rules directly as Clubhouse Stories. 
+Make anything happen automically. Define your wishes directly as Clubhouse Stories. 
 
 To give you a taste, check out these few examples. However, possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
