@@ -84,7 +84,8 @@ async function setupRules() {
     (action) =>
       action.entity_type === `story` &&
       action.name.match(/^when ?\([^)]+\)$/i) &&
-      (action.changes.name ||
+      (!action.changes ||
+        action.changes.name ||
         action.changes.description ||
         action.changes.label_ids)
   ).then(({ name }) => {
