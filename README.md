@@ -1,6 +1,6 @@
 # Clubhouse Gears
 
-Gears is an extension to Clubhouse.io that enables automating common tasks in a WHEN-THEN pattern. Rules are written in plain Javascript and configured directly in Clubhouse. 
+Gears is an extension to Clubhouse.io that enables automating common tasks in a WHEN-THEN pattern. Rules are written in plain Javascript and written directly in Clubhouse. 
 
 <p align="center">
   <a href="http://www.youtube.com/watch?v=SpzzbbauKRA" title="Introduction to Clubhouse Gears">
@@ -8,25 +8,28 @@ Gears is an extension to Clubhouse.io that enables automating common tasks in a 
   </a>
 </p>
 
-To give you a taste, check out these few examples. However, possibilities really are endless. Also see [Recipes](#Recipes) for code.
+Here's a taste:
+
 
 - Every third wednesday of the month, create a new story in project "Company maintenance" named "Send invoices". Set due date 7 days later.
 - When a story in project "Design" is completed, create a new story in project "Engineering" with the same name and with a relationship to the design story.
 - When a story is moved to "Release" column, send an e-mail using Sendgrid.
 - For every story created, search Wikipedia for information about name and comment an excerpt. (why would you want this?)
 
+Possibilities really are endless. Also see [Recipes](#Recipes) for code.
+
 # Preparation
 
 1. You need to run Gears somewhere publicly available. For example DigitalOcean, or a home server (with port forwarding). An idea might also be to create a tunnel to your local computer (for local testing).
-2. You need to create a Clubhouse Webhook. Go to clubhouse.io, click your profile picture, Integrations, Webhooks, Add New Webhook.
+2. Create a Clubhouse Webhook. Go to clubhouse.io, click your profile picture, Integrations, Webhooks, Add New Webhook. Pick a secret and point it to your publicly available port.
 
 # Installation
 
-**Note of caution:** All code provided in Clubhouse stories is executed on the server. This means that all members of Clubhouse will be able to run any code wherever this is deployed. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
+**Note of caution:** Code written in Clubhouse stories is executed on the server, meaning Clubhouse members _will be able to run malicious code_. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
 
 ## Running locally
 ```
-npm install mikabytes/clubhouse-gears
+npm add -g mikabytes/clubhouse-gears
 
 CLUBHOUSE="insert clubhouse API token here" PORT="1337" SECRET="insert clubhouse secret here" gears
 ```
@@ -44,9 +47,9 @@ sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert
 
 # How to use
 
-Gears fetches all the rules from Clubhouse. Any story that has the label "gears" set on it and a name that is formatted like "when (some code goes here)" will be used. See [Recipes](#Recipes) for examples.
+Gears fetches rules from Clubhouse. Any story that has the label "gears" set on it and a name that is formatted like "when (some code goes here)" will be used. See [Recipes](#Recipes) for examples.
 
-When a change qualifies (passes the `when()` clause in Story name), Gears looks for code blocks in the story description and executes it as javascript. **Note**: only code blocks are used, so you are free to document your gear as you wish.
+When the trigger fires, Gears executes code blocks in the story description (as plain javascript). **Note**: only code blocks are used, so you are free to document your gear as you wish.
 
 # API
 
@@ -91,7 +94,7 @@ This is an internal module that submits actions when time has passed various cri
 | quarter | 1 to 4 | A new quarter |
 | year | 1 to 12 | A new year |
 
-Note that all these criterias are always present in `metadata` variable. However `action.changes` will only include the ones that are relevant for the current action.
+These criterias are always present in `metadata` variable. However `action.changes` will only include the ones that are relevant for the current action.
 
 # Extensions
 
@@ -206,3 +209,7 @@ if (story.project_id === project_id) {
 
 console.log(`I just created this story ch${newStory.id}`)
 ```
+
+# Roadmap
+
+- Custom external triggers: When, or if, there's interest, I'll add a feature to provide additional triggers. This would enable external integration in some ways that are currently limited. It can still be done with some form of polling (based on the `minutes` event from `time` module).
