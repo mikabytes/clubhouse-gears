@@ -210,6 +210,28 @@ if (story.project_id === project_id) {
 console.log(`I just created this story ch${newStory.id}`)
 ```
 
+## Add a command to clear all comments on a story
+
+When anyone writes a comment with text `/clear`, all comments is deleted on that story. I find this especially useful when clearing error messages in a Gears story.
+
+```
+when (entity_type === `story-comment` && action_type === `create`)
+```
+
+```javascript
+if (action.text === `/clear`) {
+  storyId = action.app_url.match(/story\/(\d+)/)[1]
+  story = await api.getStory(storyId)
+  for (const comment of story.comments) {
+    try {
+      await api.deleteStoryComment(storyId, comment.id)
+    } catch(e) {
+      // api always throws error here, even if the call was successful. There's a request to fix that: https://github.com/clubhouse/clubhouse-lib/pull/98
+    }
+  }
+}
+```
+
 # Roadmap
 
 - Custom external triggers: When, or if, there's interest, I'll add a feature to provide additional triggers. This would enable external integration in some ways that are currently limited. It can still be done with some form of polling (based on the `minutes` event from `time` module).
