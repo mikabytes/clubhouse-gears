@@ -4,7 +4,7 @@ import getTimeBasedChanges from "./getTimeBasedChanges.js"
 describe(`getTimeBasedChanges`, () => {
   it(`should always include minute as change, and rest in reference`, () => {
     const [changes, reference] = getTimeBasedChanges(
-      new Date(2021, 2, 11, 17, 20)
+      new Date(2021, 2, 11, 17, 20) // March 11, 5.20pm, 2021
     )
     assert.equal(changes.minute, 20)
     assert.equal(reference.minute, 20)

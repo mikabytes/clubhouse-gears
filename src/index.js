@@ -121,6 +121,8 @@ app.post(`/`, async (req, res) => {
   if (!signature || !correctDigest(req.body, signature)) {
     console.log(`Invalid signature ${signature}`)
     return res.status(401).json({ message: `You are unauthorized.` })
+  } else {
+    res.send(200)
   }
 
   let json
