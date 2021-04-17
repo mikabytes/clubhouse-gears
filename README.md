@@ -27,22 +27,21 @@ Possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
 **Note of caution:** Code written in Clubhouse stories is executed on the server, meaning Clubhouse members _will be able to run malicious code_. It is recommended to run Gears in an isolated environment such as Docker or a VM on a network that shares no sensitive resources.
 
-## Running locally
+## Run locally
 ```
 npm add -g clubhouse-gears
 
 CLUBHOUSE="insert clubhouse API token here" PORT="1337" SECRET="insert clubhouse secret here" gears
 ```
 
-## Run in docker
+## Run using Docker
+
+This repository is built at Docker Hub using semver tags. I'd suggest sticking with the major version, unless you're feeling adventurous. See all versions here: https://hub.docker.com/repository/docker/mikabytes/clubhouse-gears/tags
+
+You can also use tag `:latest` for the master branch. Thas is, however, not guaranteed to be stable.
 
 ```
-git clone git@github.com:mikabytes/clubhouse-gears
-
-cd clubhouse-gears
-
-sudo docker build -t gears .
-sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert clubhouse secret here" -p 1337:80 -it gears
+sudo docker run -e CLUBHOUSE="insert clubhouse API token here" -e SECRET="insert clubhouse secret here" -p 1337:80 mikabytes/clubhouse-gears:1
 ```
 
 # How to use
