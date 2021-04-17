@@ -29,7 +29,7 @@ Possibilities really are endless. Also see [Recipes](#Recipes) for code.
 
 ## Running locally
 ```
-npm add -g mikabytes/clubhouse-gears
+npm add -g clubhouse-gears
 
 CLUBHOUSE="insert clubhouse API token here" PORT="1337" SECRET="insert clubhouse secret here" gears
 ```
